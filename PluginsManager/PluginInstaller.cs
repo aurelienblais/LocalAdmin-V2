@@ -519,6 +519,8 @@ internal static class PluginInstaller
         var success = false;
         await using var fs = File.OpenWrite(targetPath);
 
+        ConsoleUtil.WriteLine($"DEBUG: {name} {url} {targetPath}");
+        ConsoleUtil.WriteLine($"DEBUG: {HttpClient.DefaultRequestHeaders}");
         try
         {
             using var response = await HttpClient.GetAsync(url);
@@ -531,6 +533,7 @@ internal static class PluginInstaller
 
             if (!response.IsSuccessStatusCode)
             {
+                ConsoleUtil.WriteLine($"DEBUG: {response.Content}\n{response.Headers}");
                 ConsoleUtil.WriteLine($"[PLUGIN MANAGER] Failed to download plugin {name}! (Status code: {response.StatusCode})", ConsoleColor.Red);
                 return false;
             }
