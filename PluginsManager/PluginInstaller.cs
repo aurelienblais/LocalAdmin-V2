@@ -391,9 +391,9 @@ internal static class PluginInstaller
                         metadata = null;
                     }
 
-                    ConsoleUtil.WriteLine("[PLUGIN MANAGER] Cleaning up...", ConsoleColor.Blue);
-                    FileUtils.DeleteDirectoryIfExists(extractDir);
-                    FileUtils.DeleteIfExists($"{tempPath}{safeName}-dependencies.zip");
+                    // ConsoleUtil.WriteLine("[PLUGIN MANAGER] Cleaning up...", ConsoleColor.Blue);
+                    // FileUtils.DeleteDirectoryIfExists(extractDir);
+                    // FileUtils.DeleteIfExists($"{tempPath}{safeName}-dependencies.zip");
                 }
 
                 if (abort)
@@ -552,8 +552,8 @@ internal static class PluginInstaller
             await fs.FlushAsync();
             fs.Close();
 
-            if (!success)
-                File.Delete(targetPath);
+            // if (!success)
+            //     File.Delete(targetPath);
         }
     }
 
