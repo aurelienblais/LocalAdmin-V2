@@ -108,13 +108,13 @@ internal static class PluginInstaller
                     else
                         nonNwApiFound++;
 
-                    pluginUrl = asset.browser_download_url;
+                    pluginUrl = asset.url;
                     designatedForNwApi = thisNw;
                 }
                 else if (asset.name.Equals("dependencies-nw.zip", StringComparison.OrdinalIgnoreCase))
-                    dependenciesUrl = asset.browser_download_url;
+                    dependenciesUrl = asset.url;
                 else if (dependenciesUrl == null && asset.name.Equals("dependencies.zip", StringComparison.OrdinalIgnoreCase))
-                    dependenciesUrl = asset.browser_download_url;
+                    dependenciesUrl = asset.url;
             }
 
             if (pluginUrl == null)
