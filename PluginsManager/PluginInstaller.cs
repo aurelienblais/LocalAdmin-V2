@@ -517,13 +517,15 @@ internal static class PluginInstaller
     private static async Task<bool> Download(string name, string url, string targetPath)
     {
         var success = false;
+        var client = new HttpClient();
         await using var fs = File.OpenWrite(targetPath);
 
-        ConsoleUtil.WriteLine($"DEBUG: {name} {url} {targetPath}");
-        ConsoleUtil.WriteLine($"DEBUG: {HttpClient.DefaultRequestHeaders}");
+        client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/octet-stream"));
+
         try
         {
-            using var response = await HttpClient.GetAsync(url);
+            using var response = await client.GetAsync(url);
 
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
@@ -552,8 +554,8 @@ internal static class PluginInstaller
             await fs.FlushAsync();
             fs.Close();
 
-            // if (!success)
-            //     File.Delete(targetPath);
+            if (!success)
+                File.Delete(targetPath);
         }
     }
 
